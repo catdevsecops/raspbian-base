@@ -1,0 +1,16 @@
+[Unit]
+Description="HashiCorp Vault"
+Documentation=http://www.vaultproject.io
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# User=vault
+# Group=vault
+ExecStart=/usr/local/bin/vault server -config /etc/vault.d/server.config
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
